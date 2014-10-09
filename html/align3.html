@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>FLEX</title>
+	<style>
+		.outer {
+			width:400px;
+		  	height:300px;
+		  	background:#ccc;
+			display:flex;
+		    justify-content:center;
+		    align-items:center;
+		}		
+		.inner1 {
+			flex-grow:1;
+			background:#0c0;
+			height:100px;
+		}
+		.inner2 {
+			flex-grow:2;
+			background:#0cc;
+			height:100px;
+		}
+		.test1 {
+			flex-direction:row-reverse;
+		}
+		.test2 .inner2 {
+			order:2;
+		}
+		.test2 .inner1 {
+			order:1;
+		}
+	</style>
+</head>
+<body>
+	<p>
+		使用flex盒模型实现div水平垂直居中，较新标准，兼容性较差
+	</p>
+	<div class="outer">
+		 <div class="inner2"></div>
+	 	<div class="inner1"></div> 	
+	</div>
+
+	<p>
+		使用flex盒模型指定方向改变元素顺序
+	</p>
+	<div class="outer test1">
+		 <div class="inner2"></div>
+	 	<div class="inner1"></div> 	
+	</div>
+
+	<p>
+		元素自身指定顺序
+	</p>
+	<div class="outer test2">
+		 <div class="inner2"></div>
+	 	<div class="inner1"></div> 	
+	</div>
+</body>
+</html>
