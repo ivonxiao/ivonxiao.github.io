@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<title>无忧密-密码管理工具，密码生成，让每个网站使用不同密码</title>
+	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+	<meta name="description" content="无忧密是密码管理工具，它通过本地生成密码，不通过服务端，密码真正只有您自己知道。只要记住一个密码就能在不同网站上应用不同的密码，解决密码漏泄可能造成的撞库风险">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="format-detection" content="email=no"/>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- uc强制竖屏 -->
+    <meta name="screen-orientation" content="portrait">
+    <!-- QQ强制竖屏 -->
+    <meta name="x5-orientation" content="portrait">
+    <!-- UC强制全屏 -->
+    <meta name="full-screen" content="yes">
+    <!-- QQ强制全屏 -->
+    <meta name="x5-fullscreen" content="true">
+    <!-- UC应用模式 -->
+    <meta name="browsermode" content="application">
+    <!-- QQ应用模式 -->
+    <meta name="x5-page-mode" content="app">
+    <link rel="stylesheet" href="../fonts/iconfont.css">
+    <link rel="stylesheet" href="../css/wuyoupassword.css">
+</head>
+<body>
+	<h1>
+		无忧密
+		<span><i class="iconfont icon-wenhao"></i></span>
+	</h1>
+	<img class="pass-bg" src="../images/pass-bg.jpg" alt="无忧密">
+	<form action="#">
+		<div class="input-group">
+			<i class="iconfont icon-mima"></i>
+			<input class="input" type="password" placeholder="您的记忆密码" id="rember_pwd">
+			<i class="iconfont icon-kejian js-toggle-password"></i>
+		</div>
+		<div class="input-group">
+			<i class="iconfont icon-xinxi"></i>
+			<input class="input" type="text" placeholder="站点区别码" id="diff_code">
+		</div>
+		<div class="input-group">
+			<i class="iconfont icon-num"></i>
+			<input class="input" type="number" min="8" max="20" placeholder="密码长度" id="pwd_len" value="16">
+		</div>
+		<div class="input-group js-pwdtype-container">
+			<label class="pwdtype-label">
+				<i class="iconfont icon-danxuan"></i>
+				<input type="radio" value="1" name="pwdtype">6位数字
+			</label>
+			<label class="pwdtype-label active">
+				<i class="iconfont icon-danxuan-checked"></i>
+				<input type="radio" value="2" name="pwdtype" checked>一般密码
+			</label>
+			<label class="pwdtype-label">
+				<i class="iconfont icon-danxuan"></i>
+				<input type="radio" value="3" name="pwdtype">复杂密码
+			</label>
+		</div>
+		<button class="btn-info" type="button" id="apply">计算</button>
+		<p class="created-pasword-container" style="display:none">
+			生成密码：<span class="created-password"></span>
+		</p>
+	</form>
+	<!-- <script src="../js/lib/crypto-core-min.js"></script>
+	// <script src="../js/lib/md5-min.js"></script>
+	// <script src="../js/lib/hmac-min.js"></script> -->
+	<script src="../js/lib/crypto-min.js"></script>
+	<script src="../js/lib/zepto.js"></script>
+	<script>
+	(function(){
+		var btnCalc = document.querySelector('#apply');
+		var elemRemberpwd = document.querySelector('#rember_pwd');
+		var elemDiffcode = document.getElementById('diff_code');
+		var elemPwdlen = document.getElementById('pwd_len');
+		var elemTogglePwd = document.querySelector('.js-toggle-password');
+		var $container = $('.js-pwdtype-container');
+
+		function calcPassword() {
+			var defaultNum = '603927';
+			var result = CryptoJS.HmacMD5(elemDiffcode.value,elemRemberpwd.value).toString();
+			var pwdType = document.querySelector('[name=pwdtype]:checked').value;
+			var len = result.length;
+			if(pwdType === '1') {
+				result = result.match(/\d/g);
+				if(result) {
+					if(result.length < 6) {
+						result.push(6,0,3,9,2,7);
+					}
+					result = result.join('').slice(0,6);
+				}else {
+					result = defaultNum;
+				}
+			}else if(pwdType === '2' || pwdType === '3') {
+				var match = result.match(/[a-z]/g);
+				if(match) {
+					match = match.slice(0,3);
+					result = result.replace(/[a-z]/g,function(v){
+						if(match.indexOf(v) > -1) {
+							return v.toUpperCase();
+						}else {
+							return v;
+						}
+					});
+				}
+				if(pwdType === '3') {
+					result = result.replace(/\d/,'_').replace(/[a-zA-Z]/,'?');
+				}
+			}
+			return result;
+		}
+		$('html').attr('data-dpr',window.devicePixelRatio);
+		btnCalc.addEventListener('click',function(){
+			var ret = calcPassword();
+			var pwdLen =+$('#pwd_len').val();
+			if(pwdLen < 8 || pwdLen > 20) {
+				pwdLen = 16;
+			}
+			ret = ret.slice(0,pwdLen);
+			$('.created-password').text(ret);
+			$('.created-pasword-container').show();
+		},false);
+
+		elemTogglePwd.addEventListener('click',function(){
+			var classList = elemTogglePwd.classList;
+			if(classList.contains('icon-kejian')) {
+				//显示密码
+				elemRemberpwd.type = 'text';
+				classList.remove('icon-kejian');
+				classList.add('icon-bukejian');
+			}else {
+				elemRemberpwd.type = 'password';
+				classList.remove('icon-bukejian');
+				classList.add('icon-kejian');
+			}
+		});
+
+		//密码强度单选切换
+		$container.on('click','label',function() {
+			var $self = $(this);
+			var $prevSelectedOption = $container.find('.active');
+			$prevSelectedOption.removeClass('active');
+			$prevSelectedOption.find('.icon-danxuan-checked').addClass('icon-danxuan').removeClass('icon-danxuan-checked');
+
+			$self.addClass('active');
+			$self.find('.icon-danxuan').addClass('icon-danxuan-checked').removeClass('icon-danxuan');
+		});
+	})();
+	</script>
+</body>
+</html>
