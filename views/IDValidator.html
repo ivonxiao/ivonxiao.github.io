@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<title>学乐无忧-身份证查询验证工具，生成合法身份证号码工具</title>
+	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+	<meta name="description" content="身份证查询验证工具，生成合法身份证号码工具，是前端测试身份证的有效工具">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="format-detection" content="email=no"/>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- uc强制竖屏 -->
+    <meta name="screen-orientation" content="portrait">
+    <!-- QQ强制竖屏 -->
+    <meta name="x5-orientation" content="portrait">
+    <!-- UC强制全屏 -->
+    <meta name="full-screen" content="yes">
+    <!-- QQ强制全屏 -->
+    <meta name="x5-fullscreen" content="true">
+    <!-- UC应用模式 -->
+    <meta name="browsermode" content="application">
+    <!-- QQ应用模式 -->
+    <meta name="x5-page-mode" content="app">
+    <link rel="stylesheet" href="../css/amui/amui.css">
+    <link rel="stylesheet" href="../css/amui/header.css">
+</head>
+<body>
+	<div class="am-header">
+	    <h1 class="am-header-title">身份证信息查验</h1>
+	</div>
+	<div class="am-whitespace am-ft-sm" am-mode="10px"></div>
+	<div class="am-list" am-mode="flat chip form">
+	    <div class="am-list-body">
+	        <div class="am-list-item am-input-autoclear">
+	            <div class="am-list-control">
+	                <input type="text" placeholder="身份证号" value="" class="js-input-id">
+	            </div>
+	            <div class="am-list-clear"><i class="am-icon-clear am-icon" am-mode="clear"></i></div>
+	        </div>
+	    </div>
+	    <div class="am-whitespace" am-mode="10px"></div>
+	    <button type="button" class="am-button" am-mode="blue 43px" id="btn_search">查询</button>
+	</div>
+	<div id="info_hint" class="am-wingblank" am-mode="15px"></div>
+	<div class="am-list" am-mode="flat chip form">
+	    <div class="am-list-header">生成一个身份证号</div>
+	    <button type="button" class="am-button" am-mode="blue light 43px" id="btn_create">生成</button>
+	    <div class="am-list-body">
+	        <div class="am-list-item">
+	            <div class="am-list-control">
+	                <input type="text" placeholder="生成的身份证号" value="" class="js-input-newid">
+	            </div>
+	        </div>
+	    </div>
+	</div>
+	<script src="../js/lib/IDValidator.min.js"></script>
+	<script src="../js/lib/GB2260.min.js"></script>
+	<script src="../js/lib/amui.js"></script>
+	<script src="../js/lib/zepto.js"></script>
+	<script>
+		var Validator = new IDValidator(GB2260);
+		$('#btn_search').on('click',function() {
+			var $infoHint = $('#info_hint');
+			var idVal = $('.js-input-id').val();
+			var ret = Validator.getInfo(idVal);
+			var html = '';
+			if(ret === false) {
+				$infoHint.text('无效的身份证号码').addClass('am-ft-orange');
+			}else {
+				html += "<p>{</p>";
+		        for( var i in ret ){
+		            if(!ret.hasOwnProperty(i) ) continue;
+		            html += ('<p>&nbsp;&nbsp;<code>"'+i+'</code> : "'+ret[i]+'",</p>');
+		        }
+		        html += "<p>}</p>";
+		        $infoHint.html(html).removeClass('am-ft-orange');
+			}
+		});
+
+		$('#btn_create').on('click',function() {
+			var id = Validator.makeID();
+			$('.js-input-newid').val(id);
+		});
+	</script>
+</body>
+</html>
