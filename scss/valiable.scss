@@ -1,0 +1,58 @@
+// colors
+$gray-base:              #000;
+$gray-darker:            lighten($gray-base, 13.5%); // #222
+$gray-dark:              lighten($gray-base, 20%);   // #333
+$gray:                   lighten($gray-base, 33.5%); // #555
+$gray-light:             lighten($gray-base, 46.7%); // #777
+$gray-lighter:           lighten($gray-base, 93.5%); // #eee
+$link-color:             #337ab7;
+$link-hover-color:      darken($link-color, 15%);
+$color-highlight:   #f6ab1a;
+$body-bg-color: #fff;
+$border-color: #eee;
+// nav
+$nav-hover-color:   #2580d9;
+// Typography
+$font-family-mobile-base:  "Helvetica Neue", Helvetica, STHeiTi, Arial, sans-serif;
+
+//Tables
+$table-cell-padding:            8px;
+$table-border-color:            #ddd;
+//斑马条效果背景
+$table-bg-accent:               #f9f9f9;
+$table-bg-row-hover:                #f5f5f5;
+$table-bg-row-active:               $table-bg-row-hover;
+
+//Buttons
+$btn-font-weight:                normal;
+
+$btn-default-color:              #333;
+$btn-default-bg:                 #fff;
+$btn-default-border:             #ccc;
+$btn-border-radius-base: 5px;
+$btn-info-bg: #56ABE4;
+$btn-info-color: #fff;
+
+//Forms
+$input-color:                    $gray;
+$input-border:                   #ccc;
+$input-border-radius:            5px;
+$input-border-focus:             #66afe9;
+$input-color-placeholder:        #999;
+
+//== Form states and alerts
+$state-success-text:             #3c763d;
+$state-success-bg:               #dff0d8;
+$state-success-border:           #eee;
+
+$state-info-text:                #31708f;
+$state-info-bg:                  #d9edf7;
+$state-info-border:              #eee;
+
+$state-warning-text:             #8a6d3b;
+$state-warning-bg:               #fcf8e3;
+$state-warning-border:           #eee;
+
+$state-danger-text:              #a94442;
+$state-danger-bg:                #f2dede;
+$state-danger-border:            #eee;

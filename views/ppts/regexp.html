@@ -1,0 +1,140 @@
+<!--
+    Powered By nodePPT - This is probably the best web presentation tool so far!
+    version: 1.4.2
+    site: https://github.com/ksky521/nodePPT
+    date: 
+-->
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>常用知识点记录 - By 漏沙</title>
+    <link rel="stylesheet" media="all" href="./css/nodeppt.css">
+    <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="./css/phone.css">
+    
+    <link rel="stylesheet" href="./js/highlight/styles/monokai_sublime.css">
+    <link rel="stylesheet" href="./css/font-awesome.css">
+    
+<link rel="stylesheet" href="./css/theme.moon.css">
+</head>
+<body>
+<div class="slides">
+    <slides id="container">
+        <slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>常用知识点记录</h1>
+<h2>@漏沙</h2>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article>
+<h2>正则表达式一</h2>
+<ul>
+<li>浮点数：<pre><code class="javascript">/^([+-]?)\d*.\d+$/</code></pre></li>
+<li>正浮点数：<pre><code class="javascript">/^[1-9]\d<em>.\d</em>|0.\d<em>[1-9]\d</em>$/</code></pre></li>
+<li>负浮点数：<pre><code class="javascript">/^-([1-9]\d<em>.\d</em>|0.\d<em>[1-9]\d</em>)$/</code></pre></li>
+<li>整数：<pre><code class="javascript">/^-?[1-9]\d*$/</code></pre></li>
+<li>数字：<pre><code class="javascript">/^([+-]?)\d*.?\d+$/</code></pre></li>
+<li>正数：<pre><code class="javascript">/^[1-9]\d*|0$/</code></pre></li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article>
+<h2>正则表达式二</h2>
+<ul>
+<li>仅中文：<pre><code class="javascript">/^[\u4e00-\u9fa5]+$/</code></pre></li>
+<li>仅ASCII字符：<pre><code class="javascript">/^[\x00-\xFF]+$/</code></pre></li>
+<li>QQ：<pre><code class="javascript">/^[1-9]<em>[1-9][0-9]</em>$/</code></pre></li>
+<li>邮编：<pre><code class="javascript">/^\d{6}$/</code></pre></li>
+<li>用户名：<pre><code class="javascript">/^[A-Za-z0-9<em>-\u4e00-\u9fa5]+$/</code></pre>（包含中文，大小写、数字及“-”，“</em>”，最长20位）</li>
+<li>公司名称：<pre><code class="javascript">/^[A-Za-z0-9_()（）-\u4e00-\u9fa5]+$/</code></pre> （4-40位长度限制）</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article>
+<h2>正则表达式三</h2>
+<ul>
+<li>email: <pre><code class="javascript">/^\w+((-\w+)|(.\w+))<em>\@[A-Za-z0-9]+((.|-)[A-Za-z0-9]+)</em>.[A-Za-z0-9]+$/</code></pre></li>
+<li>URL：<pre><code class="javascript">/^http[s]?:\/\/([\w-]+.)+[\w-]+([\w-.\/?%&amp;=]*)?$/</code></pre></li>
+<li>身份证：<pre><code class="javascript">/^<a href="[0-9]{14}|[0-9]{16}([0-9]|x|X" target="_blank">1-9</a>)$/</code></pre></li>
+<li>手机号：<pre><code class="javascript">/^0?(13|15|17|18|14)[0-9]{9}$/</code></pre></li>
+<li>电话：<pre><code class="javascript">/^[0-9-()（）]{7,18}$/</code></pre></li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article>
+<h2>正则表达式四</h2>
+<ul>
+<li>企业营业执照：<pre><code class="javascript">/^[A-Za-z0-9-]{1,30}$/</code></pre></li>
+<li>车牌号：<pre><code class="javascript">/^[\u4e00-\u9fa5][A-Za-z][A-Za-z0-9]{5}$/</code></pre></li>
+<li>车架号：<pre><code class="javascript">/^[A-Za-z0-9]{6}$/ or /^[A-Za-z0-9]{17}$/</code></pre></li>
+</ul>
+
+</article></section></slide>
+        
+
+        <!-- <slide class="slide logoslide dark nobackground">
+            <article class="flexbox vcenter">
+                <h2 style="color: white;">Powered By nodePPT v1.4.2</h2>
+            </article>
+        </slide> -->
+        <div class="slideTip" id="tip"></div>
+    </slides>
+</div>
+<canvas id="drawBoard" class="draw-board" width="900" height="700"></canvas>
+<div class="progress"><span id="progress"></span></div>
+<div id="_buttons">
+    <div class="_btn-box" id="_btn-box" style="display:none;">
+        <button class="fa fa-arrow-circle-left" id="_btn-prev"></button>
+        <button class="fa fa-arrow-circle-right" id="_btn-next"></button>
+        <button class="fa fa-paint-brush" id="_btn-brush"></button>
+        <button class="fa fa-compress" id="_btn-overview" data-toggle="fa fa-expand"></button>
+    </div>
+    <button class="fa fa-bars" id="_btn-bar"  data-toggle="fa fa-close"></button>
+</div>
+<script src="./js/mixjs/lib/mix.0.3.0.min.js"></script>
+<script>
+var base = location.protocol + '//' + location.host;
+
+var path = (location.pathname + '#').split('/').filter(function(v){
+    return !!v;
+});
+path.pop();
+path = path.join('/');
+MixJS.config({
+    baseURL: [ base, path, 'js'].join('/')+'/'
+});
+
+</script>
+<script src="./js/mixjs/lib/event/broadcast.js"></script>
+<script src="./js/nodeppt.js"></script>
+<script>
+Slide.init({
+    containerID: 'container',
+    drawBoardID: 'drawBoard',
+    slideClass: '.slide',
+    buildClass: '.build',
+    progressID: 'progress',
+    transition: 'slide3',
+    width: 1100,
+    dir: './',
+    
+    //打开下面的注释就开启postMessage方式
+    //访问网址127.0.0.1:8080/ppt/demo#client
+    control:{
+        type: 'postMessage',
+        args:{
+            isControl:  false
+        }
+    },
+    
+    tipID: 'tip'
+});
+MixJS.loadJS('highlight/highlight.pack.js',function(){
+    hljs.tabReplace = '  ';
+    hljs.initHighlightingOnLoad();
+});
+</script>
+
+
+<!--placeholder-->
+</body>
+</html>
