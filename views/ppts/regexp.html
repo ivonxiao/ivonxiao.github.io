@@ -28,41 +28,47 @@
 <slide class="slide"><section class="slide-wrapper"><article>
 <h2>正则表达式一</h2>
 <ul>
-<li>浮点数：<pre><code class="javascript">/^([+-]?)\d*.\d+$/</code></pre></li>
-<li>正浮点数：<pre><code class="javascript">/^[1-9]\d<em>.\d</em>|0.\d<em>[1-9]\d</em>$/</code></pre></li>
-<li>负浮点数：<pre><code class="javascript">/^-([1-9]\d<em>.\d</em>|0.\d<em>[1-9]\d</em>)$/</code></pre></li>
+<li>浮点数：<pre><code class="javascript">/^([+-]?)\d*\.\d+$/</code></pre></li>
+<li>正浮点数：<pre><code class="javascript">/^[1-9]\d*.\d*|0.\d*[1-9]\d*$/</code></pre></li>
+<li>负浮点数：<pre><code class="javascript">/^-([1-9]\d*.\d*|0.\d*[1-9]\d*)$/</code></pre></li>
 <li>整数：<pre><code class="javascript">/^-?[1-9]\d*$/</code></pre></li>
-<li>数字：<pre><code class="javascript">/^([+-]?)\d*.?\d+$/</code></pre></li>
-<li>正数：<pre><code class="javascript">/^[1-9]\d*|0$/</code></pre></li>
 </ul>
 
 </article></section></slide>
 <slide class="slide"><section class="slide-wrapper"><article>
 <h2>正则表达式二</h2>
 <ul>
+<li>数字：<pre><code class="javascript">/^([+-]?)\d*.?\d+$/</code></pre></li>
+<li>正数：<pre><code class="javascript">/^[1-9]\d*|0$/</code></pre></li>
 <li>仅中文：<pre><code class="javascript">/^[\u4e00-\u9fa5]+$/</code></pre></li>
 <li>仅ASCII字符：<pre><code class="javascript">/^[\x00-\xFF]+$/</code></pre></li>
-<li>QQ：<pre><code class="javascript">/^[1-9]<em>[1-9][0-9]</em>$/</code></pre></li>
-<li>邮编：<pre><code class="javascript">/^\d{6}$/</code></pre></li>
-<li>用户名：<pre><code class="javascript">/^[A-Za-z0-9<em>-\u4e00-\u9fa5]+$/</code></pre>（包含中文，大小写、数字及“-”，“</em>”，最长20位）</li>
-<li>公司名称：<pre><code class="javascript">/^[A-Za-z0-9_()（）-\u4e00-\u9fa5]+$/</code></pre> （4-40位长度限制）</li>
 </ul>
 
 </article></section></slide>
 <slide class="slide"><section class="slide-wrapper"><article>
 <h2>正则表达式三</h2>
 <ul>
-<li>email: <pre><code class="javascript">/^\w+((-\w+)|(.\w+))<em>\@[A-Za-z0-9]+((.|-)[A-Za-z0-9]+)</em>.[A-Za-z0-9]+$/</code></pre></li>
-<li>URL：<pre><code class="javascript">/^http[s]?:\/\/([\w-]+.)+[\w-]+([\w-.\/?%&amp;=]*)?$/</code></pre></li>
-<li>身份证：<pre><code class="javascript">/^<a href="[0-9]{14}|[0-9]{16}([0-9]|x|X" target="_blank">1-9</a>)$/</code></pre></li>
-<li>手机号：<pre><code class="javascript">/^0?(13|15|17|18|14)[0-9]{9}$/</code></pre></li>
-<li>电话：<pre><code class="javascript">/^[0-9-()（）]{7,18}$/</code></pre></li>
+<li>QQ：<pre><code class="javascript">/^[1-9]*[1-9][0-9]*$/</code></pre></li>
+<li>邮编：<pre><code class="javascript">/^\d{6}$/</code></pre></li>
+<li>用户名：<pre><code class="javascript">/^[A-Za-z0-9_\-\u4e00-\u9fa5]+$/</code></pre>（包含中文，大小写、数字及“-”，“</em>”，最长20位）</li>
+<li>公司名称：<pre><code class="javascript">/^[A-Za-z0-9_()（）-\u4e00-\u9fa5]+$/</code></pre> （4-40位长度限制）</li>
 </ul>
 
 </article></section></slide>
 <slide class="slide"><section class="slide-wrapper"><article>
 <h2>正则表达式四</h2>
 <ul>
+<li>email: <pre><code class="javascript">/^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/</code></pre></li>
+<li>URL：<pre><code class="javascript">/^http[s]?:\/\/([\w-]+.)+[\w-]+([\w-.\/?%&amp;=]*)?$/</code></pre></li>
+<li>身份证：<pre><code class="javascript">/^[1-9]([0-9]{14}|[0-9]{16}([0-9]|x|X))$/</code></pre></li>
+<li>手机号：<pre><code class="javascript">/^0?(13|15|17|18|14)[0-9]{9}$/</code></pre></li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article>
+<h2>正则表达式五</h2>
+<ul>
+<li>电话：<pre><code class="javascript">/^[0-9-()（）]{7,18}$/</code></pre></li>
 <li>企业营业执照：<pre><code class="javascript">/^[A-Za-z0-9-]{1,30}$/</code></pre></li>
 <li>车牌号：<pre><code class="javascript">/^[\u4e00-\u9fa5][A-Za-z][A-Za-z0-9]{5}$/</code></pre></li>
 <li>车架号：<pre><code class="javascript">/^[A-Za-z0-9]{6}$/ or /^[A-Za-z0-9]{17}$/</code></pre></li>
