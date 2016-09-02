@@ -1,4 +1,14 @@
 var COREOBJ = {
+	util: {
+		replaceAsterisk(str){
+			if (!str) return '';
+			if (str.length <= 8) return str;
+			str = str.trim();
+			var l = str.length,
+				aLen = new Array(l-7).join('*');
+			return str.replace(str.substr(4, (l-7)), aLen);
+		}
+	},
 	url: {
         queryString: function (key, url) {
             url = url || location.href;
