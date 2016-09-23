@@ -1,12 +1,27 @@
 var COREOBJ = {
 	util: {
-		replaceAsterisk(str){
+		replaceAsterisk: function(str){
 			if (!str) return '';
 			if (str.length <= 8) return str;
 			str = str.trim();
 			var l = str.length,
 				aLen = new Array(l-7).join('*');
 			return str.replace(str.substr(4, (l-7)), aLen);
+		},
+		closeCurrentWindow: function() {
+			if (navigator.userAgent.indexOf("MSIE") > 0) {
+				if (navigator.userAgent.indexOf("MSIE 6.0") > 0) {
+					window.opener = null;
+					window.close();
+				} else {
+					window.open('', '_top');
+					window.top.close();
+				}
+			}else {
+				window.opener = null;
+				window.open('', '_self', '');
+				window.close();
+			}
 		}
 	},
 	url: {
