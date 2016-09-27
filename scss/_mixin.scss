@@ -1,0 +1,122 @@
+@mixin clearfix() {
+    &:after {
+        content: '';
+        display: table;
+        clear: both;
+    }
+}
+@mixin setTapColor($c:rgba(0,0,0,0)) {
+    -webkit-tap-highlight-color: $c;
+}
+/*1px边框*/
+@mixin setTopLine($c: #C7C7C7) {
+    content: " ";
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    height: 1px;
+    border-top: 1px solid $c;
+    color: $c;
+    transform-origin: 0 0;
+    transform: scaleY(0.5);
+}
+
+@mixin setBottomLine($c: #C7C7C7) {
+    content: " ";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: 1px;
+    border-bottom: 1px solid $c;
+    color: $c;
+    transform-origin: 0 100%;
+    transform: scaleY(0.5);
+}
+
+@mixin setLeftLine($c: #C7C7C7) {
+    content: " ";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1px;
+    bottom: 0;
+    border-left: 1px solid $c;
+    color: $c;
+    transform-origin: 0 0;
+    transform: scaleX(0.5);
+}
+
+@mixin setRightLine($c: #C7C7C7) {
+    content: " ";
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 1px;
+    bottom: 0;
+    border-right: 1px solid $c;
+    color: $c;
+    transform-origin: 100% 0;
+    transform: scaleX(0.5);
+}
+/*单行文本溢出显示省略号*/
+@mixin ellipsis($w:auto) {
+    width: $w;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    word-wrap: normal;
+}
+/*显示指定行数，超出显示省略号*/
+@mixin ellipsisLn($line) {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: $line;
+}
+/*文本换行*/
+@mixin text_wrap() {
+    word-wrap:break-word;
+    word-break:break-all;
+}
+/*箭头*/
+@mixin _setArrow($arrowsize, $borderColor, $borderWidth){
+    display: inline-block;
+    height: $arrowsize;
+    width: $arrowsize;
+    border-width: $borderWidth $borderWidth 0 0;
+    border-color: $borderColor;
+    border-style: solid;
+}
+
+@mixin setArrowTop($arrowsize, $borderColor, $borderWidth) {
+    /*exp: setArrowTop(8px,#ccc,2px);*/
+    @include _setArrow($arrowsize, $borderColor, $borderWidth);
+    transform: rotate(-45deg);
+}
+
+@mixin setArrowRight($arrowsize, $borderColor,$borderWidth) {
+    @include _setArrow($arrowsize, $borderColor, $borderWidth);
+    transform: rotate(45deg);
+
+    position: relative;
+    top: -2px;
+}
+
+@mixin setArrowDown($arrowsize, $borderColor,$borderWidth) {
+    @include _setArrow($arrowsize, $borderColor, $borderWidth);
+    transform: rotate(135deg);
+
+    position: relative;
+    top: -3px;
+}
+
+@mixin setArrowLeft($arrowsize, $borderColor,$borderWidth) {
+    @include _setArrow($arrowsize, $borderColor, $borderWidth);
+    transform: rotate(-135deg);
+
+    position: relative;
+    top: -2px;
+}
